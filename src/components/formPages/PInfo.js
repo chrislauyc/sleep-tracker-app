@@ -1,5 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {
+    Grid, TextField, Button
+} from '@material-ui/core';
+import {StyledImg} from '../../styles/StyledImg';
 function PInfo(props){
     const {formValues,onChange,errors} = props;
     const isValid = () =>{
@@ -12,27 +16,30 @@ function PInfo(props){
         return(errorsFound.length===0&&errorsInitialized.length===3);
     };
     return(
-        <div>
-            <img src='/assets/you.png' alt='account'></img>
-            <label>
-                First Name
-                <input type='text' name={'first_name'} onChange={onChange} value={formValues.first_name}></input>
-            </label>
-            <label>
-                Last Name
-                <input type='text' name={'last_name'} onChange={onChange} value={formValues.last_name}></input>
-            </label>
-            <label>
-                birthdate
-                <input type='date' name='birthdate' onChange={onChange} value={formValues.birthdate}></input>
-            </label>
-            <Link to='/form/account'>
-                <button>Back</button>
-            </Link>
-            <Link to='/form/sleep'>
-                <button disabled={!isValid()}>Next</button>
-            </Link>
-        </div>
+        <Grid container direction='row' justify='center'>
+            <Grid item xs={6}>
+                <StyledImg src='/assets/you.png' alt='account'></StyledImg>
+            </Grid>
+            <Grid item>
+                <Grid container direction='column' alignItems='center'>
+                    <Grid item>
+                        <TextField label='First Name' name={'first_name'} onChange={onChange} value={formValues.first_name}></TextField>
+                    </Grid>
+                    <Grid item>
+                        <TextField label='Last Name' name={'last_name'} onChange={onChange} value={formValues.last_name}></TextField>
+                    </Grid>
+                    <Grid item>
+                        <TextField type='date' label='Birthdate' name='birthdate' onChange={onChange} value={formValues.birthdate} InputLabelProps={{
+                        shrink: true,
+                        }}></TextField>
+                    </Grid>
+                    <Grid item>
+                        <Button component={Link} to='/form/account'>Back</Button>
+                        <Button component={Link} to='/form/sleep' disabled={!isValid()}>Next</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     );
 }
 export default PInfo;

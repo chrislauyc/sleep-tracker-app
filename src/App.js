@@ -4,8 +4,8 @@ import Form  from './components/Form';
 import Header from './components/Header';
 import Users from './components/Users';
 import {schema} from './validation/formSchema';
-import {Route, Switch, Link} from 'react-router-dom';
-import {Container,Button} from '@material-ui/core';
+import {Route, Switch} from 'react-router-dom';
+import {Container} from '@material-ui/core';
 import styled from 'styled-components';
 import axios from 'axios';
 import * as yup from 'yup';
@@ -49,7 +49,7 @@ function App() {
   },[formValues]);
   return(
     <div className="App">
-      <Header />
+      <Header isLoggedIn={isLoggedIn}/>
       <main>
         <Switch>
           <Route path='/form'>
@@ -59,10 +59,6 @@ function App() {
           </Route>
           <Route path='/'>
             <Container>
-              {isLoggedIn?        
-                <div>Welcome!</div>:
-                <Button component={Link} to='/form/account'>Signup</Button>
-              }
               <StyledImg src='/assets/Koala_Sleep.jpg'></StyledImg>
             </Container>
           </Route>

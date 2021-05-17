@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {
     Grid, TextField, Checkbox,FormControlLabel,Button
 } from '@material-ui/core';
-import styled from 'styled-components';
+import {StyledImg} from '../../styles/StyledImg';
 function Account(props){
     const {formValues,onChange,errors} = props;
     const isValid = () =>{
@@ -43,6 +43,3 @@ function Account(props){
     );
 }
 export default Account;
-const StyledImg = styled.img`
-    max-width:100%;
-`;

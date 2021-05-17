@@ -4,11 +4,12 @@ import PInfo from './formPages/PInfo';
 import Sleep from './formPages/Sleep';
 import Errors from './Errors';
 import {Route, Switch, Redirect} from 'react-router-dom';
+import {Button} from '@material-ui/core';
 function Form(props){
     const{formValues, changeValues, submitForm, isValid, errors, isLoggedIn} = props;
     const onChange = (e)=>{
         const {name,value,type,checked} = e.target;
-        const inputValue = type === 'checkbox'? checked:value.trim();
+        const inputValue = type === 'checkbox'? checked:type==='text'?value.trim():value;
         changeValues(name,inputValue);
     }
     const onSubmit = (e)=>{
@@ -28,7 +29,7 @@ function Form(props){
                     <Sleep formValues={formValues} onChange={onChange}/>
                 </Route>
             </Switch>
-            <button type='submit' disabled={!isValid}>Finish</button>
+            <Button type='submit' disabled={!isValid}>Finish</Button>
             <Errors errors={errors} isvalid={isValid} />
             {isLoggedIn? <Redirect to='/'></Redirect>:''}
         </form>
