@@ -1,11 +1,12 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useRouteMatch} from 'react-router-dom';
 import {
     Grid, TextField, Button
 } from '@material-ui/core';
 import {StyledImg} from '../../styles/StyledImg';
 function PInfo(props){
-    const {formValues,onChange,errors} = props;
+    const {formValues,onChange,errors,setActivePage} = props;
+    setActivePage('personalinfo');
     const isValid = () =>{
         let errorsInitialized = Object.keys(errors).filter((key)=>(
             (key==='first_name'||key==='last_name'||key==='birthdate')
@@ -16,7 +17,7 @@ function PInfo(props){
         return(errorsFound.length===0&&errorsInitialized.length===3);
     };
     return(
-        <Grid container direction='row' justify='center'>
+        <Grid container direction='column' justify='center' alignItems='center'>
             <Grid item xs={6}>
                 <StyledImg src='/assets/you.png' alt='account'></StyledImg>
             </Grid>

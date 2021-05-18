@@ -5,7 +5,8 @@ import {
 } from '@material-ui/core';
 import {StyledImg} from '../../styles/StyledImg';
 function Account(props){
-    const {formValues,onChange,errors} = props;
+    const {formValues,onChange,errors,setActivePage} = props;
+    setActivePage('account');
     const isValid = () =>{
         let errorsInitialized = Object.keys(errors).filter((key)=>(
             (key==='email'||key==='password'||key==='terms')
@@ -16,12 +17,12 @@ function Account(props){
         return(errorsFound.length===0&&errorsInitialized.length===3);
     };
     return(
-        <Grid container direction='row' justify='center'>
+        <Grid container direction='column' justify='center' alignItems='center'>
             <Grid item xs={6}>
                 <StyledImg src='/assets/account.png' alt='account'></StyledImg>
             </Grid>
             <Grid item>
-                <Grid container direction='column' alignItems='center'>
+                <Grid container direction='column' justify='center' alignItems='center'>
                     <Grid item>
                         <TextField label='Email Address' type='text' name='email' onChange={onChange} value={formValues.email}/>
                     </Grid>

@@ -4,7 +4,7 @@ import Form  from './components/Form';
 import Header from './components/Header';
 import Users from './components/Users';
 import {schema} from './validation/formSchema';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch,useRouteMatch} from 'react-router-dom';
 import {Container} from '@material-ui/core';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -25,6 +25,7 @@ function App() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activePage, setActivePage] = useState('/');
   const changeValues = (name,value) =>{
     yup.reach(schema,name)
     .validate(value)
@@ -41,6 +42,11 @@ function App() {
     })
     .catch((e)=>console.log('error',e));
   };
+  const updateActivePage=(pageName)=>{
+    if(pageName!==activePage){
+      setActivePage(pageName);
+    }
+  };
   useEffect(()=>{
     schema.isValid(formValues)
     .then((valid)=>{
@@ -49,12 +55,12 @@ function App() {
   },[formValues]);
   return(
     <div className="App">
-      <Header isLoggedIn={isLoggedIn}/>
+      <Header isLoggedIn={isLoggedIn} activePage={activePage}/>
       <main>
         <Switch>
           <Route path='/form'>
             <Container>
-              <Form formValues={formValues} changeValues={changeValues} submitForm={submitForm} isValid={isValid} errors={errors} isLoggedIn={isLoggedIn}></Form>
+              <Form formValues={formValues} changeValues={changeValues} submitForm={submitForm} isValid={isValid} errors={errors} isLoggedIn={isLoggedIn} setActivePage={updateActivePage}></Form>
             </Container>
           </Route>
           <Route path='/'>

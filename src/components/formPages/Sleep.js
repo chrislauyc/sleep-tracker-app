@@ -6,7 +6,8 @@ import {
 import {StyledImg} from '../../styles/StyledImg';
 import FormSelector from '../../styles/FormSelector';
 function Sleep(props){
-    const {formValues, onChange} = props;
+    const {formValues, onChange, setActivePage} = props;
+    setActivePage('sleep');
     const hourArray = () =>{
         let ret = []
         for(let i=0; i<=24; i+=0.5){
@@ -15,12 +16,12 @@ function Sleep(props){
         return ret;
     };
     return(
-        <Grid container direction='row' justify='center'>
+        <Grid container direction='column' justify='center' alignItems='center'>
             <Grid item xs={6}>
                 <StyledImg src='/assets/sleep.png' alt='account'></StyledImg>
             </Grid>
             <Grid item>
-                <Grid container direction='column' alignItems='center'>
+                <Grid container direction='column' alignItems='center' justify='center'>
                     <Grid item>
                         <TextField InputLabelProps={{shrink:true}} label='Goal: Bed Time' type='time' name='bedtime' onChange={onChange} value={formValues.bedtime}></TextField>
                     </Grid>
